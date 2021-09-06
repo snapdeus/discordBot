@@ -1,12 +1,23 @@
 require('dotenv').config();
 
 const { Client, Intents } = require('discord.js');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const { CLIENT_ID, GUILD_ID } = require('../config.json')
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS] });
 const PREFIX = "$"
 
 client.once('ready', () => {
     console.log(`${ client.user.tag } has logged in.`)
 });
+
+client.on('guildMemberAdd', member => {
+    member.guild.channels.cache.get('884569101786284053').send(`Welcome, ${ member.user.username }, good to have you!`);
+});
+
+// client.on("guildMemberAdd", (member) => {
+//     console.log(`New User "${ member.user.username }" has joined "${ member.guild.name }"`);
+//     member.guild.channels.cache.find(c => c.name === "welcome").send(`"${ member.user.username }" has joined this server`);
+// });
+
 
 client.on('messageCreate', (message) => {
     if (message.author.bot) return;
