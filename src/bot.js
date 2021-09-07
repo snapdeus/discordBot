@@ -31,19 +31,19 @@ client.on('guildMemberAdd', member => {
 
 });
 
-client.on('messageCreate', (message) => {
-    if (message.author.bot) return;
-    if (message.content.startsWith(PREFIX)) {
-        const [CMD_NAME, ...args] = message.content
-            .toLowerCase()
-            .trim()
-            .substring(PREFIX.length)
-            .split(/\s+/);
-        if (CMD_NAME === 'kick') {
-            message.channel.send('Kicked the User')
-        }
+// client.on('messageCreate', (message) => {
+//     if (message.author.bot) return;
+//     if (message.content.startsWith(PREFIX)) {
+//         const [CMD_NAME, ...args] = message.content
+//             .toLowerCase()
+//             .trim()
+//             .substring(PREFIX.length)
+//             .split(/\s+/);
+//         if (CMD_NAME === 'kick') {
+//             message.channel.send('Kicked the User')
+//         }
 
-    }
-});
+//     }
+// });
 
 client.login(process.env.DISCORDJS_BOT_TOKEN)
