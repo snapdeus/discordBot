@@ -26,7 +26,7 @@ async function getQuote() {
 
 client.on('guildMemberAdd', member => {
     getQuote().then(quote => {
-        member.guild.channels.cache.get('884569101786284053').send(`Welcome, ${ member.user.username }, ${ quote }`);
+        member.guild.channels.cache.get('884569101786284053').send(`Welcome, ${ member.user.username }. ${ quote }`);
     })
 
 });
