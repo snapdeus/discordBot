@@ -25,10 +25,9 @@ function makeUniquePhrase() {
 
 function makeUniqueGreeting() {
     let randomGreetings = greetings[Math.floor(Math.random() * greetings.length)]
-    console.log(randomGreetings);
+    return randomGreetings;
 }
 
-makeUniqueGreeting();
 
 client.once('ready', () => {
     console.log(`${ client.user.tag } has logged in.`)
@@ -49,24 +48,24 @@ async function getQuote() {
 
 client.on('guildMemberAdd', member => {
     getQuote().then(quote => {
-        member.guild.channels.cache.get('884569101786284053').send(`Welcome, ${ member.user.username }. Here is your unique phrase: ${ makeUniquePhrase() }`);
+        member.guild.channels.cache.get('884569101786284053').send(`${ makeUniqueGreeting() }, ${ member.user.username }. Here is your secret phrase: "${ makeUniquePhrase() }." Make sure not let anyone see your SECRET phrase. Write it down and store it in a safe place. `);
     })
 
 });
 
-// client.on('messageCreate', (message) => {
-//     if (message.author.bot) return;
-//     if (message.content.startsWith(PREFIX)) {
-//         const [CMD_NAME, ...args] = message.content
-//             .toLowerCase()
-//             .trim()
-//             .substring(PREFIX.length)
-//             .split(/\s+/);
-//         if (CMD_NAME === 'kick') {
-//             message.channel.send('Kicked the User')
-//         }
+client.on('messageCreate', (message) => {
+    if (message.author.bot) return;
+    if (message.content.startsWith(PREFIX)) {
+        const [CMD_NAME, ...args] = message.content
+            .toLowerCase()
+            .trim()
+            .substring(PREFIX.length)
+            .split(/\s+/);
+        if (CMD_NAME === 'phraseme') {
+            message.channel.send(`Here is your secret phrase: "${ makeUniquePhrase() }." Make sure not let anyone see your SECRET phrase. Write it down and store it in a safe place. `);
+        }
 
-//     }
-// });
+    }
+});
 
 client.login(process.env.DISCORDJS_BOT_TOKEN)
