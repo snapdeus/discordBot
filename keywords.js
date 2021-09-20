@@ -16,7 +16,7 @@ exports.greetings = [
     "Boy, am I glad to see you",
     "Hey",
     "Ahoy-hoy",
-    "Oh look, it's",
+    "Oh wow...hello,",
     "Thanks for joining the server",
     "I'm glad you're here",
     "You made it"

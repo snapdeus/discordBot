@@ -1,4 +1,5 @@
-require('dotenv').config();
+const path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
 const { keyWords, verbs, adjectives, nouns1, nouns2, adverbs, greetings } = require('../keywords')
 
@@ -48,7 +49,8 @@ async function getQuote() {
 
 client.on('guildMemberAdd', member => {
     getQuote().then(quote => {
-        member.guild.channels.cache.get('884569101786284053').send(`${ makeUniqueGreeting() }, ${ member.user.username }. Here is your secret phrase: "${ makeUniquePhrase() }." Make sure not let anyone see your SECRET phrase. Write it down and store it in a safe place. `);
+        member.guild.channels.cache.get('884569101786284053').send(`${ makeUniqueGreeting() }, ${ member.user.username }`);
+        member.send(`Here is your *secret* phrase: "**${ makeUniquePhrase() }.**" Make sure not let anyone see your *SECRET* phrase. Write it down and store it in a safe place. `);
     })
 
 });
@@ -62,7 +64,7 @@ client.on('messageCreate', (message) => {
             .substring(PREFIX.length)
             .split(/\s+/);
         if (CMD_NAME === 'phraseme') {
-            message.channel.send(`Here is your secret phrase: "${ makeUniquePhrase() }." Make sure not let anyone see your SECRET phrase. Write it down and store it in a safe place. `);
+            message.author.send(`Here is your secret phrase: "**${ makeUniquePhrase() }.**" Make sure not let anyone see your *SECRET* phrase. Write it down and store it in a safe place. `);
         }
 
     }
