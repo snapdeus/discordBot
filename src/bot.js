@@ -48,10 +48,10 @@ async function getQuote() {
 
 
 client.on('guildMemberAdd', member => {
-    getQuote().then(quote => {
-        member.guild.channels.cache.get('884569101786284053').send(`${ makeUniqueGreeting() }, ${ member.user.username }`);
-        member.send(`Here is your *secret* phrase: "**${ makeUniquePhrase() }.**" Make sure not let anyone see your *SECRET* phrase. Write it down and store it in a safe place. `);
-    })
+
+    member.guild.channels.cache.get('883158009054900264').send(`${ makeUniqueGreeting() }, ${ member.user.username }`);
+    member.send(`Here is your *secret* phrase: "**${ makeUniquePhrase() }.**" Make sure not let anyone see your *SECRET* phrase. Write it down and store it in a safe place. `);
+
 
 });
 
