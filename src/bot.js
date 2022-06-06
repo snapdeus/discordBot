@@ -8,7 +8,7 @@ const axios = require('axios')
 const { Client, Intents } = require('discord.js');
 const { CLIENT_ID, GUILD_ID } = require('../config.json')
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS] });
-const PREFIX = "$"
+const PREFIX = "!"
 
 
 function makeUniquePhrase() {
@@ -49,8 +49,8 @@ async function getQuote() {
 
 client.on('guildMemberAdd', member => {
 
-    member.guild.channels.cache.get('883158009054900264').send(`${ makeUniqueGreeting() }, ${ member.user.username }`);
-    member.send(`Here is your *secret* phrase: "**${ makeUniquePhrase() }.**" Make sure not let anyone see your *SECRET* phrase. Write it down and store it in a safe place. `);
+    member.guild.channels.cache.get('883158009054900264').send(`${ makeUniqueGreeting() }, ${ member.user.username }. Here is your *secret* phrase: "**${ makeUniquePhrase() }.**" Make sure not let anyone see your *SECRET* phrase. Write it down and store it in a safe place.`);
+
 
 
 });
@@ -64,7 +64,7 @@ client.on('messageCreate', (message) => {
             .substring(PREFIX.length)
             .split(/\s+/);
         if (CMD_NAME === 'phraseme') {
-            message.author.send(`Here is your secret phrase: "**${ makeUniquePhrase() }.**" Make sure not let anyone see your *SECRET* phrase. Write it down and store it in a safe place. `);
+            message.channel.send(`Here is your secret phrase: "**${ makeUniquePhrase() }.**" Make sure not let anyone see your *SECRET* phrase. Write it down and store it in a safe place. `);
         }
 
     }
